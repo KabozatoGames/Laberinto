@@ -1,11 +1,17 @@
-import pygame, sys, glob, tmx
-from pygame import*
 
-h = 400
-w = 800
+import pygame, sys, glob, pytmx, Mapa
+from pygame import*
+from pytmx.util_pygame import*
+
+
+h = 600
+w = 1200
+
+
 
 screen = pygame.display.set_mode((w,h))
 clock = pygame.time.Clock()
+
 pygame.display.set_caption("Pruebas	Pygame")	
 def load_image(filename, transparent=False):	
 #	Intentamos	cargar	la	imagen,	si	no	se	puede	
@@ -31,7 +37,7 @@ class player:
        self.x = 200
        self.y = 300
             
-       self.initialAnimSpeed = 10
+       self.initialAnimSpeed = 5
        self.currentAnimSpeed = self.initialAnimSpeed
             
        self.anim1 = glob.glob("CaminandoAdelante/Caminando*.png")
@@ -51,9 +57,9 @@ class player:
        self.animMax4 = len(self.anim4) - 1
        
        self.image = load_image(self.anim1[0],True)
+       self.update(0)
 
-       self.update(0) 
-                 
+        
     def update(self,pos):
        if pos != 0:
           self.currentAnimSpeed -= 1
@@ -94,11 +100,7 @@ class player:
              else:
                 self.animPosition += 1                
        screen.blit(self.image,(self.x,self.y))            
-
-      
-#Se cambiaria coin por pildora 
-#Se uso coin, porque era el objeto que teniamos mas completo (Imagen y sonido)
-
+   
 #class coin:
   #  def __init__(self):
         
@@ -125,10 +127,7 @@ pygame.mixer.music.play(-1,0.0)
 
 while 1:
     screen.fill((0,0,0))
-    clock.tick(60)
-    
-    #Ideas para las pildoras y coleccionables
-    
+    clock.tick(30)
     #if player1.y == coin1.y:
         #effect = pygame.mixer.Sound("coin.ogg")
         #effect.play()
@@ -138,19 +137,18 @@ while 1:
         #    coin1.y = 350
         
     #else:
-    #    coin1.update()   
-    
+    #    coin1.update()    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
         elif event.type == KEYDOWN and (event.key == K_UP or event.key == K_DOWN or event.key == K_LEFT or event.key == K_RIGHT):
-            position = 1
+            position = 5
             
         elif event.type == KEYUP and (event.key == K_UP or event.key == K_DOWN or event.key == K_LEFT or event.key == K_RIGHT):
             position = 0
             player1.animPosition = 0
-    player1.update(position)
-        
-    pygame.display.flip()       
 
+    Mapa.render_tiles_to_screen("Mapa1.tmx") 
+    player1.update(position)
+    pygame.display.flip()       
