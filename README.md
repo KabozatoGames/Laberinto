@@ -11,4 +11,5 @@ Javier Herrera
 
 
 Cambios:
-1.01: ----
+1.0.1 .- Animación del Personaje
+1.0.2 .- Se adhiere el mapa 
