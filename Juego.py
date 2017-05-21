@@ -1,5 +1,5 @@
 
-import pygame, sys, glob, pytmx, Mapa
+import pygame, sys, glob, pytmx, Mapa ,random
 from pygame import*
 from pytmx.util_pygame import*
 
@@ -111,11 +111,72 @@ class player:
   #  def update(self):
    #     screen.blit(self.image,(self.x,self.y))
 
+class Enemy:
+	def __init__(self):
+		
+               #se deben poner las imagenes del perro
+	       self.x1 = 300
+	       self.y2 = 400
+              
+	       self.initialAnimSpeed = 5
+	       self.currentAnimSpeed = self.initialAnimSpeed
+		#importante
+               #se cambiaria las imagenes
+	       self.anim1 = glob.glob("CaminandoAdelante/Caminando*.png")
+	       self.anim2 = glob.glob("CaminandoAtras/Caminando*.png")
+	       self.anim3 = glob.glob("CaminandoDerecha/Caminando*.png")
+	       self.anim4 = glob.glob("CaminandoIzquierda/Caminando*.png")
+            
+	       self.anim1.sort()
+	       self.anim2.sort()
+	       self.anim3.sort()
+	       self.anim4.sort()
+      	       self.animPosition = 0
+	       self.animMax1 = len(self.anim1) - 1
+	       self.animMax2 = len(self.anim2) - 1
+	       self.animMax3 = len(self.anim3) - 1
+	       self.animMax4 = len(self.anim4) - 1
+       	       self.image = load_image(self.anim1[0],True)
+	       self.update(0)
+	def updateIA(self,pos):
+		if pos != 0:
+			#faltan las raices
+			xy = x*x + y*y
+			xy1 = x1*x1 + y1*y1
+			if(xy1 - xy == 25):
+				while(x != x1):
+					if(x - x1 < 0):
+						x1 = x1 - 1
+						if(#aqui iria si no pudiera moverse):
+							#nose como sera la clase pared 3:
+							
+					if(x - x1 > 0):
+						x1 = x1 + 1
+						if(#aqui iria si no pudiera moverse):
+				while(y != y1):
+					if(y - y1 < 0):
+						y1 = y1 - 1
+						if(#aqui iria si no pudiera moverse):
+					if(y - y1 > 0):
+						y1 = y1 + 1
+						if(#aqui iria si no pudiera moverse):
 
+			else:
+				o = random.randrange(1,4)
+				#faltan las funciones para que no choque
+				if(o = 1):
+					x1 = x1 + 5
+				if(o = 2):
+					x1 = x1 - 5
+				if(o = 3):
+					y1 = y1 + 5
+				if(o = 4):
+					y1 = y1 - 5
 
 
 #coin1 = coin()
 player1 = player()
+Enemy1 = Enemy()
 position = 0
 
 pygame.mixer.init()
