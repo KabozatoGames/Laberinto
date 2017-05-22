@@ -220,7 +220,25 @@ class Enemy:
   #  def update(self):
    #     screen.blit(self.image,(self.x,self.y))
 
-
+class Vida:
+	def __init__(self):
+		self.vida = 100
+		self.cont++
+		def updateVida(self,playerx,playery,Enemyx1,Enemyy1):
+			Variacionx = playerx - Enemyx1
+			Variaciony = playery - Enemyy1
+			if(cont == 10):
+				self.vida = self.vida - 1	
+			
+			if(Variacionx < 3 and Variaciony < 3):
+				self.vida = self.vida - 25
+				Enemyx1 = 
+				Enemyy1 =
+			if(self.vida == 0):
+				#Se acabo el juego
+					
+				
+		
 
 
 #coin1 = coin()
