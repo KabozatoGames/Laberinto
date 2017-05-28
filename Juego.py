@@ -153,62 +153,63 @@ class Enemy:
 	       self.rect.centerx = 300
 	       self.rect.centery = 400
 	       self.updateIA(self.x1,self.y1)
-	def updateIA(self,playerx,playery):
+	def updateIA(self,playerx,playery,Vidacont1):
                 self.currentAnimSpeed -= 1
                 distancia = ((self.x1 - (600 + playerx))**2 + (self.y1 - (300 + playery))**2)**(0.5)
-                if(distancia <= 300):
-                    if((600 + playerx) != self.x1):
-                        if((600 + playerx) - self.x1 < 0):
-                            self.x1 = (self.x1 - 4)
-                            self.image = load_image(self.anim[3][self.animPosition],True)
-                            self.currentAnimSpeed = self.initialAnimSpeed
-                            if self.animPosition == self.animMax2:
-                                self.animPosition = 0
-                            else:
-                                self.animPosition += 1
-                            #if(#aqui iria si no pudiera moverse):
+		if(cont1 != 1):
+			if(distancia <= 300):
+                    		if((600 + playerx) != self.x1):
+                        		if((600 + playerx) - self.x1 < 0):
+                            			self.x1 = (self.x1 - 4)
+                            			self.image = load_image(self.anim[3][self.animPosition],True)
+                           			self.currentAnimSpeed = self.initialAnimSpeed
+                           			if self.animPosition == self.animMax2:
+                                			self.animPosition = 0
+                           			else:
+                                			self.animPosition += 1
+                            			#if(#aqui iria si no pudiera moverse):
 						#nose como sera la clase pared 3:
 						
-                        if((600 + playerx) - self.x1 > 0):
-                            self.x1 = (self.x1 + 4)
-                            self.image = load_image(self.anim[2][self.animPosition],True)
-                            self.currentAnimSpeed = self.initialAnimSpeed
-                            if self.animPosition == self.animMax2:
-                                self.animPosition = 0
-                            else:
-                                self.animPosition += 1
-                            #if(#aqui iria si no pudiera moverse):            
-                    if((300 + playery) != self.y1):
-                        if((300 + playery) - self.y1 < 0):
-                            self.y1 = (self.y1 - 4)
-                            self.image = load_image(self.anim[1][self.animPosition],True)
-                            self.currentAnimSpeed = self.initialAnimSpeed
-                            if self.animPosition == self.animMax2:
-                                self.animPosition = 0
-                            else:
-                                self.animPosition += 1
-                            #if(#aqui iria si no pudiera moverse):
-                        if((300 + playery) - self.y1 > 0):
-                            self.y1 = (self.y1 + 4)
-                            self.image = load_image(self.anim[0][self.animPosition],True)
-                            self.currentAnimSpeed = self.initialAnimSpeed
-                            if self.animPosition == self.animMax2:
-                                self.animPosition = 0
-                            else:
-                                self.animPosition += 1
-                                #if(#aqui iria si no pudiera moverse):
-                else:
-                    o = random.randrange(4)
+                        		if((600 + playerx) - self.x1 > 0):
+                            			self.x1 = (self.x1 + 4)
+                            			self.image = load_image(self.anim[2][self.animPosition],True)
+                            			self.currentAnimSpeed = self.initialAnimSpeed
+                            			if self.animPosition == self.animMax2:
+                                			self.animPosition = 0
+                            			else:
+                                			self.animPosition += 1
+                            			#if(#aqui iria si no pudiera moverse):            
+                    		if((300 + playery) != self.y1):
+                        		if((300 + playery) - self.y1 < 0):
+                           			self.y1 = (self.y1 - 4)
+                            			self.image = load_image(self.anim[1][self.animPosition],True)
+                            			self.currentAnimSpeed = self.initialAnimSpeed
+                            			if self.animPosition == self.animMax2:
+                                			self.animPosition = 0
+                            			else:
+                                			self.animPosition += 1
+                            			#if(#aqui iria si no pudiera moverse):
+                        		if((300 + playery) - self.y1 > 0):
+                            			self.y1 = (self.y1 + 4)
+                            			self.image = load_image(self.anim[0][self.animPosition],True)
+                            			self.currentAnimSpeed = self.initialAnimSpeed
+                            			if self.animPosition == self.animMax2:
+                                			self.animPosition = 0
+                            			else:
+                                			self.animPosition += 1
+                                		#if(#aqui iria si no pudiera moverse):
+                	else:
+                    		o = random.randrange(4)
                         
-                    if(o == 0):
-                        self.x1 = self.x1 + 5
-                    if(o == 1):
-                        self.x1 = self.x1 - 5
-                    if(o == 2):
-                        self.y1 = self.y1 + 5
-                    if(o == 3):
-                        self.y1 = self.y1 - 5
-                
+                    		if(o == 0):
+                        		self.x1 = self.x1 + 5
+                    		if(o == 1):
+                        		self.x1 = self.x1 - 5
+                    		if(o == 2):
+                        		self.y1 = self.y1 + 5
+                    		if(o == 3):
+                        		self.y1 = self.y1 - 5
+					
                 screen.blit(self.image,(self.x1 - playerx,self.y1 - playery)) 
 #class coin:
   #  def __init__(self):
@@ -225,16 +226,23 @@ class Vida:
 		self.vida = 100
 		self.cont++
 		def updateVida(self,playerx,playery,Enemyx1,Enemyy1):
-			Variacionx = playerx - Enemyx1
-			Variaciony = playery - Enemyy1
-			if(cont == 10):
-				self.vida = self.vida - 1	
+			self.Variacionx = playerx - Enemyx1
+			self.Variaciony = playery - Enemyy1
+			if(self.cont == 10):
+				self.vida = self.vida - 1
+				self.cont = 0
 			
-			if(Variacionx < 3 and Variaciony < 3):
+			if(self.Variacionx < 3 and self.Variaciony < 3):
 				self.vida = self.vida - 25
-				Enemyx1 = 
-				Enemyy1 =
+				self.cont1 = 1
+				
+			if(self.cont1 == 1):
+				self.cont2 = self.cont2 + 1
+				if(self.cont2 == 5):
+					self.cont1 = 0
+					self.cont2 = 0
 			if(self.vida == 0):
+				("mensaje de game over y opciones para continuar o salir")
 				#Se acabo el juego
 					
 				
