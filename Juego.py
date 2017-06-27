@@ -223,25 +223,40 @@ class Enemy:
 
 class Vida:
 	def __init__(self):
-		self.vida = 78
+		
 		self.cont++
-		def updateVida(self,playerx,playery,Enemyx1,Enemyy1):
+		self.anime = glob.glob("BarraCordura/BarraCordura*.png")
+		self.anime.sort()
+		self.x = 0
+		self.image = load_image(self.anime[self.x],True)
+       		self.rect = self.image.get_rect()
+       		self.rect.centerx = 0
+       		self.rect.centery = 600
+		self.animeMax = len(self.anime) - 1
+		
+		def updateVida(self,playerx,playery,Enemyx1,Enemyy1,x):
 			self.Variacionx = playerx - Enemyx1
 			self.Variaciony = playery - Enemyy1
 			if(self.cont == 10):
-				self.vida = self.vida - 1
+				
+				x = x + 1
+				self.image = load_image(self.anime[self.x],True)
 				self.cont = 0
 			
 			if(self.Variacionx < 3 and self.Variaciony < 3):
-				self.vida = self.vida - 26
+				
+				x = x + 26
 				self.cont1 = 1
+				self.image = load_image(self.anime[self.x],True)
+				if(x < 0):
+					x = 0
 				
 			if(self.cont1 == 1):
 				self.cont2 = self.cont2 + 1
 				if(self.cont2 == 5):
 					self.cont1 = 0
 					self.cont2 = 0
-			if(self.vida == 0):
+			if(x == 0):
 				("mensaje de game over y opciones para continuar o salir")
 				#Se acabo el juego
 					
