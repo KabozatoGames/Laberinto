@@ -248,15 +248,15 @@ class Vida:
 				x = x + 26
 				self.cont1 = 1
 				self.image = load_image(self.anime[self.x],True)
-				if(x < 0):
-					x = 0
+				if(x > 78):
+					x = 78
 				
 			if(self.cont1 == 1):
 				self.cont2 = self.cont2 + 1
 				if(self.cont2 == 5):
 					self.cont1 = 0
 					self.cont2 = 0
-			if(x == 0):
+			if(x == 78):
 				("mensaje de game over y opciones para continuar o salir")
 				#Se acabo el juego
 					
