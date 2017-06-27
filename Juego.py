@@ -247,6 +247,7 @@ class Vida:
 				
 				x = x + 26
 				self.cont1 = 1
+				self.cont2 = 0
 				self.image = load_image(self.anime[self.x],True)
 				if(x > 78):
 					x = 78
