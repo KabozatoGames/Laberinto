@@ -223,7 +223,7 @@ class Enemy:
 
 class Vida:
 	def __init__(self):
-		self.vida = 100
+		self.vida = 78
 		self.cont++
 		def updateVida(self,playerx,playery,Enemyx1,Enemyy1):
 			self.Variacionx = playerx - Enemyx1
@@ -233,7 +233,7 @@ class Vida:
 				self.cont = 0
 			
 			if(self.Variacionx < 3 and self.Variaciony < 3):
-				self.vida = self.vida - 25
+				self.vida = self.vida - 26
 				self.cont1 = 1
 				
 			if(self.cont1 == 1):
