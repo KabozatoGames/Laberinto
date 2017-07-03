@@ -153,7 +153,7 @@ class Enemy:
 	       self.rect.centerx = 300
 	       self.rect.centery = 400
 	       self.updateIA(self.x1,self.y1)
-	def updateIA(self,playerx,playery,Vidacont1):
+	def updateIA(self,playerx,playery):
                 self.currentAnimSpeed -= 1
                 distancia = ((self.x1 - (600 + playerx))**2 + (self.y1 - (300 + playery))**2)**(0.5)
 		if(cont1 != 1):
@@ -223,43 +223,90 @@ class Enemy:
 
 class Vida:
 	def __init__(self):
-		
-		self.cont++
 		self.anime = glob.glob("BarraCordura/BarraCordura*.png")
 		self.anime.sort()
-		self.x = 0
-		self.image = load_image(self.anime[self.x],True)
+		self.z = 0
+		self.cont = 0
+		self.image = load_image(self.anime[self.z],True)
        		self.rect = self.image.get_rect()
        		self.rect.centerx = 0
        		self.rect.centery = 600
 		self.animeMax = len(self.anime) - 1
-		
-		def updateVida(self,playerx,playery,Enemyx1,Enemyy1,x):
-			self.Variacionx = playerx - Enemyx1
-			self.Variaciony = playery - Enemyy1
-			if(self.cont == 10):
+		self.blanco = (255,255,255)
+		self.gris1 = (180,180,180)
+		self.gris2 = (100,100,100)
+		self.negro = (0,0,0)
+		self.updateVida(self.z,self.cont,)
+	def ObjetoTexto(Mensaje,color):
+		textoSurperfice1 = font.render(Mensaje,True,color)
+		return textoSurperfice1 ,textoSurperfice1.get_rect()
+	def MensajePantalla(Mensaje , color , cambioy = 0):
+		textoSuperficie , textoRect = ObjetoTexto
+		textoRect.center = (w/2),(h/2) + cambioy
+		PantallaTexto = font.render(Mensaje , True , color)
+		screen.blit(textoSuperficie,textoRect)
+	def updateVida(self,playerx,playery,Enemyx1,Enemyy1):
+		self.Variacionx = playerx - Enemyx1
+		self.Variaciony = playery - Enemyy1
+		self.cont++
+		if(self.cont == 10):
 				
-				x = x + 1
-				self.image = load_image(self.anime[self.x],True)
-				self.cont = 0
+			self.z = self.z + 1
+			self.image = load_image(self.anime[self.z],True)
+			self.cont = 0
 			
-			if(self.Variacionx < 3 and self.Variaciony < 3):
+		if(self.Variacionx < 3 and self.Variaciony < 3):
 				
-				x = x + 26
-				self.cont1 = 1
-				self.cont2 = 0
-				self.image = load_image(self.anime[self.x],True)
-				if(x > 78):
-					x = 78
+			self.z = self.z + 26
+			self.cont1 = 1
+			self.cont2 = 0
+			if(self.x > 78):
+				self.x = 78
+			self.image = load_image(self.anime[self.z],True)
 				
-			if(self.cont1 == 1):
+			while(self.cont1 == 1):
 				self.cont2 = self.cont2 + 1
 				if(self.cont2 == 5):
 					self.cont1 = 0
 					self.cont2 = 0
-			if(x == 78):
+			if(self.z == 78):
 				("mensaje de game over y opciones para continuar o salir")
-				#Se acabo el juego
+				self.gameover = true
+				self.contDie = 0
+				screen.fill(self.gris2)
+				pygame.display.update()
+				
+			while self.gameover == true:
+				self.contDie++
+				if(self.contDie = 1):
+					screen.fill(self.negro)
+				
+				if(self.contDie = 4):
+					screen.fill(self.gris1)
+				if(self.contDie = 7):
+					screen.fill(self.blanco)
+				if(self.contDie = 8):
+					MensajePantalla = ("Has perdido" , self.gris1,20)
+				if(self.contDie = 9):
+					MensajePantalla = ("Has perdido" , self.gris2,20)
+				if(self.contDie = 10):
+					MensajePantalla = ("Has perdido" , self.negro,20)
+					MensajePantalla = ("ESPACIO para continuar y ESCAPE para salir" , self.negro , 0)
+				
+				
+					
+				pygame.display.update()
+					
+				for event in pygame.event.get():
+					if event.type == pygame.QUIT:
+						pygame.quit()
+            					sys.exit()
+					if event.type == pygame.KEYDOWN:
+						if event.key = pygame.K_SPACE:
+							gameover = false
+						if event.key = pygame.K_ESCAPE:
+							menu1()
+				
 					
 				
 		
@@ -268,6 +315,7 @@ class Vida:
 #coin1 = coin()
 player1 = player()
 enemy1 = Enemy()
+vida1 = Vida()
 position = 0
 
 pygame.mixer.init()
