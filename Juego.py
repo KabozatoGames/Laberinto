@@ -304,6 +304,7 @@ class Vida:
 					if event.type == pygame.KEYDOWN:
 						if event.key = pygame.K_SPACE:
 							gameover = false
+							Juego()
 						if event.key = pygame.K_ESCAPE:
 							menu1()
 				
@@ -313,43 +314,44 @@ class Vida:
 
 
 #coin1 = coin()
-player1 = player()
-enemy1 = Enemy()
-vida1 = Vida()
-position = 0
+def Juego():
+	
+	player1 = player()
+	enemy1 = Enemy()
+	vida1 = Vida()
+	position = 0
+	pygame.mixer.init()
+	pygame.mixer.music.load("ice_zone.mp3")
+	pygame.mixer.music.play(-1,0.0)
 
-pygame.mixer.init()
-pygame.mixer.music.load("ice_zone.mp3")
-pygame.mixer.music.play(-1,0.0)
 
 
+	while 1:
+	    screen.fill((0,0,0))
+	    clock.tick(30)
+	    #if player1.y == coin1.y:
+		#effect = pygame.mixer.Sound("coin.ogg")
+		#effect.play()
+		#if coin1.y == 350:
+		#    coin1.y = 250
+		#elif coin1.y == 250:
+		#    coin1.y = 350
 
+	    #else:
+	    #    coin1.update()    
+	    for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+		    pygame.quit()
+		    sys.exit()
+		elif event.type == KEYDOWN and (event.key == K_UP or event.key == K_DOWN or event.key == K_LEFT or event.key == K_RIGHT):
+		    position = 6
 
-while 1:
-    screen.fill((0,0,0))
-    clock.tick(30)
-    #if player1.y == coin1.y:
-        #effect = pygame.mixer.Sound("coin.ogg")
-        #effect.play()
-        #if coin1.y == 350:
-        #    coin1.y = 250
-        #elif coin1.y == 250:
-        #    coin1.y = 350
-   
-    #else:
-    #    coin1.update()    
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-        elif event.type == KEYDOWN and (event.key == K_UP or event.key == K_DOWN or event.key == K_LEFT or event.key == K_RIGHT):
-            position = 6
-            
-        elif event.type == KEYUP and (event.key == K_UP or event.key == K_DOWN or event.key == K_LEFT or event.key == K_RIGHT):
-            position = 0
-            player1.animPosition = 0
+		elif event.type == KEYUP and (event.key == K_UP or event.key == K_DOWN or event.key == K_LEFT or event.key == K_RIGHT):
+		    position = 0
+		    player1.animPosition = 0
 
-    Mapa.render_tiles_to_screen("Mapa1.tmx",player1.x,player1.y, player1.rect) 
-    enemy1.updateIA(player1.x,player1.y)
-    player1.update(position)
-    pygame.display.flip()       
+	    Mapa.render_tiles_to_screen("Mapa1.tmx",player1.x,player1.y, player1.rect) 
+	    enemy1.updateIA(player1.x,player1.y)
+	    player1.update(position)
+	    pygame.display.flip()       
+Juego()
