@@ -220,7 +220,116 @@ class Enemy:
 
   #  def update(self):
    #     screen.blit(self.image,(self.x,self.y))
-
+class Medicina:
+	def __init__(self):
+		
+		self.anime = glob.glob("Medicina/Medicina*.png")
+		self.anime.sort()
+		self.z = 0
+		self.image = load_image(self.anime[self.z],True)
+		self.image2 = load_image("Medicina/Frasco.png",True)
+		self.rect1 = self.image.get_rect()
+		self.rect2 = self.image.get_rect()
+		
+		#posicion final del nivel
+		self.rect3 = self.image.get_rect()
+		self.rect3.centerx1 = 800
+		self.rect3.centery1 = 800
+		
+		self.cont1 = 1
+		self.cont2 = 2
+		self.cont3 = 3
+		self.cont4 = 4
+		
+		self.x = 0
+		self.y = 0
+		#se usa la funcion random para selecionar 2 posiciones sin repetirse
+		o = random.randrange(4)
+		if(o == 0):
+			self.x = self.cont1
+			o = random.randrange(3)
+			if(o == 0):
+				self.y = self.cont2
+			if(o == 1):
+				self.y = self.cont3
+			if(o == 2):
+				self.y = self.cont4
+		if(o == 1):
+			self.x = self.cont2
+			o = random.randrange(3)
+			if(o == 0):
+				self.y = self.cont1
+			if(o == 1):
+				self.y = self.cont3
+			if(o == 2):
+				self.y = self.cont4
+		if(o == 2):
+			self.x = self.cont3
+			o = random.randrange(3)
+			if(o == 0):
+				self.y = self.cont1
+			if(o == 1):
+				self.y = self.cont2
+			if(o == 2):
+				self.y = self.cont4
+		if(o == 3):
+			self.x = self.cont4
+			o = random.randrange(3)
+			if(o == 0):
+				self.y = self.cont1
+			if(o == 1):
+				self.y = self.cont2
+			if(o == 2):
+				self.y = self.cont3
+		#posiciones de la medicina dependiendo del random
+		#estas posiciones estan de ejemplo
+		if(self.x = 1):
+			self.rect1.centerx1 = 100
+			self.rect1.centery1 = 400
+		if(self.x = 2):
+			self.rect1.centerx2 = 200
+			self.rect1.centery2 = 400
+		if(self.x = 3):
+			self.rect1.centerx3 = 300
+			self.rect1.centery3 = 400
+		if(self.x = 4):
+			self.rect1.centerx4 = 400
+			self.rect1.centery4 = 400
+			
+		if(self.y = 1):
+			self.rect2.centerx1 = 100
+			self.rect2.centery1 = 400
+		if(self.y = 2):
+			self.rect2.centerx2 = 200
+			self.rect2.centery2 = 400
+		if(self.y = 3):
+			self.rect2.centerx3 = 300
+			self.rect2.centery3 = 400
+		if(self.y = 4):
+			self.rect2.centerx4 = 400
+			self.rect2.centery4 = 400
+		update()
+		def update(self):
+			#animacion de movimiento de la medicina
+			self.connt = 0
+			self.connt++
+			if(self.connt = 5):
+				self.z++
+				self.image = load_image(self.anime[self.z],True)
+			if(self.z == 1 and self.connt = 8):
+				self.z = 0
+				self.connt = 0
+					
+			#Sprite collide con las medicinas
+			#aumentar la vida en el momento que las toque(restar 28 a z de la vida)
+			#borrar la imagen de la medicina
+			
+			#final del nivel
+			
+				
+			
+		
+		
 class Vida:
 	def __init__(self):
 		self.anime = glob.glob("BarraCordura/BarraCordura*.png")
@@ -229,9 +338,10 @@ class Vida:
 		self.cont = 0
 		self.image = load_image(self.anime[self.z],True)
        		self.rect = self.image.get_rect()
-       		self.rect.centerx = 0
-       		self.rect.centery = 600
+       		self.rect.centerx = 100
+       		self.rect.centery = 500
 		self.animeMax = len(self.anime) - 1
+		#colores para darle "un toque" al final
 		self.blanco = (255,255,255)
 		self.gris1 = (180,180,180)
 		self.gris2 = (100,100,100)
