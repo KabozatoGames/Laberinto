@@ -314,11 +314,12 @@ class Medicina:
 			self.connt = 0
 			self.connt++
 			if(self.connt = 5):
+				self.connt = 0
 				self.z++
 				self.image = load_image(self.anime[self.z],True)
-			if(self.z == 1 and self.connt = 8):
+			if(self.z == 7):
 				self.z = 0
-				self.connt = 0
+				
 					
 			#Sprite collide con las medicinas
 			#aumentar la vida en el momento que las toque(restar 28 a z de la vida)
