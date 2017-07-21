@@ -284,30 +284,30 @@ class Medicina:
 		#posiciones de la medicina dependiendo del random
 		#estas posiciones estan de ejemplo
 		if(self.x = 1):
-			self.rect1.centerx1 = 100
-			self.rect1.centery1 = 400
+			self.x1 = self.rect1.centerx1 = 100
+			self.y1 = self.rect1.centery1 = 400
 		if(self.x = 2):
-			self.rect1.centerx2 = 200
-			self.rect1.centery2 = 400
+			self.x1 =self.rect1.centerx2 = 200
+			self.y1 =self.rect1.centery2 = 400
 		if(self.x = 3):
-			self.rect1.centerx3 = 300
-			self.rect1.centery3 = 400
+			self.x1 =self.rect1.centerx3 = 300
+			self.y1 =self.rect1.centery3 = 400
 		if(self.x = 4):
-			self.rect1.centerx4 = 400
-			self.rect1.centery4 = 400
+			self.x1 =self.rect1.centerx4 = 400
+			self.y1 =self.rect1.centery4 = 400
 			
 		if(self.y = 1):
-			self.rect2.centerx1 = 100
-			self.rect2.centery1 = 400
+			self.x2 = self.rect2.centerx1 = 100
+			self.y2 = self.rect2.centery1 = 400
 		if(self.y = 2):
-			self.rect2.centerx2 = 200
-			self.rect2.centery2 = 400
+			self.x2 = self.rect2.centerx2 = 200
+			self.y2 =self.rect2.centery2 = 400
 		if(self.y = 3):
-			self.rect2.centerx3 = 300
-			self.rect2.centery3 = 400
+			self.x2 = self.rect2.centerx3 = 300
+			self.y2 = self.rect2.centery3 = 400
 		if(self.y = 4):
-			self.rect2.centerx4 = 400
-			self.rect2.centery4 = 400
+			self.x2 = self.rect2.centerx4 = 400
+			self.y2 =self.rect2.centery4 = 400
 		update()
 		def update(self):
 			#animacion de movimiento de la medicina
@@ -319,7 +319,17 @@ class Medicina:
 				self.image = load_image(self.anime[self.z],True)
 			if(self.z == 7):
 				self.z = 0
+			
+		def TocarMedicina(self,playerx,playery,Medicinax,Medicinay,BarraCordura):
+			self.Variacionx = playerx - Medicinax
+			self.Variaciony = playery - Medicinay
+			
+			if(self.Variacionx < 3 and self.Variaciony < 3):
 				
+				self.z = self.z - 26
+				if(z < 0):
+					z = 0
+			
 					
 			#Sprite collide con las medicinas
 			#aumentar la vida en el momento que las toque(restar 28 a z de la vida)
